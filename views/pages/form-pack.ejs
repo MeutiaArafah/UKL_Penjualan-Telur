@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-secondary">
+            <h4>Packaging Telur</h4>
+        </div>
+        <div class="card-body">
+            <form action="<%= targetRoute %>" method="post">
+                Jenis Packaging
+                <input type="text" name="nama_pack" id="nama_pack" class="form-control" value="<%= nama_pack %>"
+                    required />
+
+                Harga
+                <input type="number" name="harga" id="harga" class="form-control" value="<%= harga %>" required />
+
+
+                <!-- using js DOM to set default value of "jenis"
+                <script>
+                    document.querySelector('select[name="jenis"]').value = ""
+                </script> -->
+
+                <button type="submit" class="btn btn-success mt-2">
+                    Simpan
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

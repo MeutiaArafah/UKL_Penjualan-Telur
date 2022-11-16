@@ -1,0 +1,60 @@
+<div class="container">
+    <h4>Data Admin</h4>
+    <hr>
+    <!-- menampilkan data admin -->
+    <ul class="list-group">
+        <!-- forEach -> scanning isi array (scan = dipanggil satu satu)-->
+        <% data.forEach(element=> { %>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <small class="text-success">
+                            Nama
+                        </small> <br>
+                        <%= element.nama_admin %> 
+                    </div>
+
+                    <div class="col-lg-3">
+                        <small class="text-success">
+                            Username
+                        </small> <br>
+                        <%= element.username %> 
+                    </div>
+
+                    <div class="col-lg-3">
+                        <small class="text-success">
+                            Password
+                        </small> <br>
+                        <%= element.password %> 
+                    </div>
+
+                    <div class="col-lg-3">
+                        <small class="text-success">
+                            Opsi
+                        </small> <br>
+
+                        <a href="/admin/edit/<%= element.id %> ">
+                            <button class="btn btn-primary">
+                                Edit
+                            </button>
+                        </a>
+
+                        <a href="/admin/delete/<%= element.id %> "
+                            onclick="return confirm(`Apakah Anda yakin ingin menghapus data ini?`)">
+                            <button class="btn btn-danger">
+                                Delete
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        <% }) %>
+    </ul> <br>
+
+
+<a href="/admin/add">
+    <button class="btn btn-md btn-success">
+        Tambah Data
+    </button>
+</a>
+</div>
