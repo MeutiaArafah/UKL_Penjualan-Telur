@@ -10,7 +10,7 @@ const namaTable = `member`
 exports.ambilDataMember = () => {
     return new Promise((resolve, rejected) => {
         /** bikin query untuk ambil data */ 
-        let query = `select * from member`
+        let query = `select * from member order by nama_member`
 
         /** jalankan query-nya */
         connection.query(query, (error, result) => {

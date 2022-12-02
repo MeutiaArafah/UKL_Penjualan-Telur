@@ -10,7 +10,7 @@ const namaTable = `admin`
 exports.ambilDataAdmin = () => {
     return new Promise((resolve, reject) => {
         /** bikin query untuk ambil data */ 
-        let query = `select * from admin`
+        let query = `select * from admin order by nama_admin`
 
         /** jalankan query-nya */
         connection.query(query, (error, result) => {

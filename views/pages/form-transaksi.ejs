@@ -1,0 +1,235 @@
+<div class="container">
+    <h3 style="color: #4E6C50;"> Form Transaksi </h3>
+    <hr>
+
+    <form action="/transaksi/add" method="post" class="text-warning">
+        Pilih Member
+        <select name="id_member" class="form-control mb-2">
+            <option value="">--Pilih Member--</option>
+            <% dataMember.forEach(element=> { %>
+                <option value="<%= element.id %>">
+                    <%= element.nama_member%>
+                </option>
+                <% }) %>
+        </select>
+
+        Tgl. Transaksi
+        <input type="date" name="tgl_transaksi" class="form-control mb-2" value="<%= tgl_transaksi %>" required />
+        <!-- required = harus diisi-->
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn mb-4 text-light" data-bs-toggle="modal" data-bs-target="#modalTelur" 
+        style="background-color: #82954B;">
+            Tambah Pilihan Telur
+        </button>
+
+        <!-- tampilin isi cart nya -->
+        <h5 style="color: #4E6C50;">
+            List Cart Telur
+        </h5>
+        <hr />
+
+        <ul class="list-group">
+            <% cart.forEach(element=> { %>
+                <li class="list-group-item mb-2">
+                    <div class="row">
+                        <!-- area jenis telur-->
+                        <div class="col-lg-3">
+                            <small>Jenis Telur</small>
+                            <h6>
+                                <%= element.jenis_telur %>
+                            </h6>
+                        </div>
+
+                        <!-- area jumlah beli-->
+                        <div class="col-lg-3">
+                            <small>Jumlah beli</small>
+                            <h6>
+                                <%= element.jumlah_telur %>
+                            </h6>
+                        </div>
+
+                        <!-- area harga satuan -->
+                        <div class="col-lg-5 ">
+                            <small>Harga Satuan</small>
+                            <h6>
+                                <%= element.harga_telur %>
+                            </h6>
+                        </div>
+                        <br>
+
+                         <!-- area nama pack-->
+                         <div class="col-lg-3">
+                            <small>Nama Pack</small>
+                            <h6>
+                                <%= element.nama_pack %>
+                            </h6>
+                        </div>
+
+                        <!-- area jumlah pack-->
+                        <div class="col-lg-3">
+                            <small>Jumlah Pack</small>
+                            <h6>
+                                <%= element.jumlah_pack %>
+                            </h6>
+                        </div>
+
+                        <!-- area harga satuan pack -->
+                        <div class="col-lg-3">
+                            <small>Harga Satuan Pack</small>
+                            <h6>
+                                <%= element.harga_pack %>
+                            </h6>
+                        </div>
+
+                        <!-- area harga total -->
+                        <div class="col-lg-2">
+                            <small>Total</small>
+                            <h6>
+                                <%= element.harga_telur * element.jumlah_telur + element.harga_pack * element.jumlah_pack %>
+                            </h6>
+                        </div>
+
+                        <!-- area hapus -->
+                        <div class="col-lg-1">
+                            <!-- <small>Opsi</small> <br> -->
+                            <a href="/cart/<%= element.id_telur %>">
+                                <button type="button" class="btn btn-sm btn-danger m-2">
+                                    &times;
+                                    <!-- hapus -->
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <% }) %>
+        </ul>
+
+        <!-- button simpan -->
+        <% if (cart.length> 0) { %>
+            <button type="submit" class="btn text-light " style="background-color: #82954B;">
+                Simpan Transaksi
+            </button>
+            <% } %>
+
+
+    </form>
+</div>
+
+<!-- modal (pop up) telur-->
+<!-- Modal -->
+<div class="modal fade" id="modalTelur" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pilih Jenis Telur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/cart" method="post">
+                    Pilih Telur
+                    <select name="id_telur" class="form-control mb-2" required onchange="pilihTelur(this.value)">
+                        <option value="">--Pilih Telur--</option>            
+                        <% dataTelur.forEach(element=> { %>
+                            <option value="<%= element.id %>">
+                                <%= element.jenis_telur %>
+                            </option>
+                            <% }) %>
+                    </select>
+
+                    Jumlah Telur
+                    <input type="number" id="jumlah_telur" name="jumlah_telur" class="form-control mb-2" required
+                        min="1" onchange="hitungTotal()" onkeyup="hitungTotal()" />
+
+                    Harga Satuan
+                    <input id="harga_telur" type="number" name="harga_telur" class="form-control mb-2" required readonly>
+
+                    Pilih Pack
+                    <select name="id_pack" class="form-control mb-2" required onchange="pilihPack(this.value)">
+                        <option value="">--Pilih Pack--</option>
+                        <% dataPack.forEach(element=> { %>
+                            <option value="<%= element.id %>">
+                                <%= element.nama_pack%>
+                            </option>
+                            <% }) %>
+                    </select>
+
+                    Jumlah Pack
+                    <input type="number" id="jumlah_pack" name="jumlah_pack" class="form-control mb-2" required min="1"
+                        onchange="hitungTotal()" onkeyup="hitungTotal()" />
+
+
+                    Harga Satuan
+                    <input id="harga_pack" type="number" name="harga_pack" class="form-control mb-2" required readonly>
+
+                    Total
+                    <input type="number" name="total" id="total" class="form-control mb-2" required readonly>
+
+                    <button type="submit" class="btn w-100 text-light   " style="background-color: #82954B;" >
+                        Tambahkan Telur
+                    </button>
+                </form>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<script>
+    function pilihTelur(id) {
+        // dapatin data telur yg bertipe string dan kita
+        // kembalikan ke bentuk array object
+        let telur = JSON.parse(`<%- dataTelurString %>`)
+
+        // mencari data telur berdasarkan id yg dipilih
+        let selectedTelur = telur.find(item => item.id == id)
+        // mencari data telur sesuai id 
+
+        // ambil data harga
+        let harga_telur = selectedTelur.harga
+
+        // set value dari harga_beli -> harga telur yg dipilih
+        document.getElementById(`harga_telur`).value = harga_telur
+
+        // dapetin nilai dari jumlah_beli
+        let jumlah_telur = Number(document.getElementById(`jumlah_telur`).value)
+    }
+
+    function pilihPack(id) {
+        // dapatin data obat yg bertipe string dan kita
+        // kembalikan ke bentuk array object
+        let pack = JSON.parse(`<%- dataPackString %>`)
+
+        // mencari data obat berdasarkan id yg dipilih
+        let selectedPack = pack.find(item => item.id == id)
+
+        // ambil data harga
+        let harga_pack = selectedPack.harga
+
+        // set value dari harga_beli -> harga obat yg dipilih
+        document.getElementById(`harga_pack`).value = harga_pack
+
+        // dapetin nilai dari jumlah_beli
+        let jumlah_pack = Number(document.getElementById(`jumlah_pack`).value)
+    }
+
+    function hitungTotal() {
+        // dapetin nilai harga beli
+        let harga_telur = Number(document.getElementById(`harga_telur`).value)
+
+        let harga_pack = Number(document.getElementById(`harga_pack`).value)
+
+        let jumlah_telur = Number(document.getElementById(`jumlah_telur`).value)
+
+        let jumlah_pack = Number(document.getElementById(`jumlah_pack`).value)
+
+        // hitung total
+        let total = jumlah_telur * harga_telur + jumlah_pack * harga_pack
+
+        // tempelin ke input total
+        document.getElementById(`total`).value = total
+    }
+</script>

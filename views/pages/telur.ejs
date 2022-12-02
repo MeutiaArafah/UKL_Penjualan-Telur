@@ -1,18 +1,18 @@
 <div class="container">
-    <h4 class="text-danger">Data Telur</h4>
+    <h4 style="color: #4E6C50">Data Telur</h4>
     <hr>
     <ul class="list-group my-2">
-        <% data.forEach(telur=> { %>
+        <!-- <% data.forEach(telur=> { %> data dari controller sendData -->
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-lg-3">
                         <small class="text-warning">Jenis Telur</small> <br />
-                        <%= telur.jenis_telur %>
+                        <%= telur.jenis_telur %> 
                     </div>
 
                     <div class="col-lg-3">
                         <small class="text-warning">Stok</small> <br />
-                        <%= telur.stok %>
+                        <%= telur.stok %> kg
                     </div>
 
                     <div class="col-lg-3">
@@ -26,7 +26,7 @@
 
                         <!-- button edit -->
                         <a href="/telur/edit/<%= telur.id %>">
-                            <button class="btn btn-sm btn-secondary">
+                            <button class="btn btn-sm" style="background-color: #BABD42">
                                 Edit
                             </button>
                         </a>
@@ -47,7 +47,7 @@
 
     <!-- button add new data -->
     <a href="/telur/add">
-        <button class="btn btn-md btn-success">
+        <button class="btn btn-md text-light" style="background-color: #82954B;">
             Tambah Data
         </button>
     </a>

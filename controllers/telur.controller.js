@@ -19,7 +19,7 @@ exports.showDataTelur = async (request, response) => {
         let dataTelur = await telurModel.findAll()
 
         /** send data to view */
-        let sendData = {
+        let sendData = { // objek karena ada key: value
             page: `telur`,
             data: dataTelur,
             /** passing data dari user yg login dari session */
@@ -95,11 +95,13 @@ exports.processInsert = async (request, response) => {
 
 exports.showEditPage = async (request, response) => {
     /** read selected ID from URL parameter */
-    let selectedID = request.params.id
+    let selectedID = request.params.id 
+                                // sesuai di route 
 
     /** store selected ID to object "parameter" */
     let parameter = {
         id: selectedID // 'id' is similar as column's name of table
+     // db: yg sebelumnya
     }
 
     /** call function for get data from database based on seleced id */
@@ -109,7 +111,7 @@ exports.showEditPage = async (request, response) => {
     let sendData = {
         page: `form-telur`, // page that will be show
         /** set each data based on data that will be change */
-        jenis_telur: selectedData[0].jenis_telur,
+        jenis_telur: selectedData[0].jenis_telur, // karena datanya ada 1 
         stok: selectedData[0].stok,
         harga: selectedData[0].harga,
         /** set target route for submit filled data */
@@ -139,7 +141,7 @@ exports.showEditPage = async (request, response) => {
 
         /** reading telur's data from user that has sent */
         let newTelur = {
-            jenis_telur: request.body.jenis_telur,
+            jenis_telur: request.body.jenis_telur, // ambil dari inputan di ejs
             stok: request.body.stok,
             harga: request.body.harga
         }
@@ -147,7 +149,7 @@ exports.showEditPage = async (request, response) => {
         /** call function for update to table of telur */
         await telurModel.update(newTelur, parameter)
 
-        /** redirect to obat's page */
+        /** redirect to telur's page */
         return response.redirect(`/telur`)
 
     } catch (error) {

@@ -1,5 +1,5 @@
 <div class="container">
-    <h4>Data Member</h4>
+    <h4 style="color: #4E6C50">Data Member</h4>
     <hr>
     <!-- menampilkan data customer -->
     <ul class="list-group">
@@ -8,33 +8,33 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-lg-3">
-                        <small class="text-succes">
+                        <small class="text-warning">
                             Nama
                         </small> <br>
                         <%= element.nama_member %> 
                     </div>
 
                     <div class="col-lg-3">
-                        <small class="text-succes">
+                        <small class="text-warning">
                             Alamat
                         </small> <br>
                         <%= element.alamat %> 
                     </div>
 
                     <div class="col-lg-3">
-                        <small class="text-succes">
+                        <small class="text-warning">
                             Telepon
                         </small> <br>
                         <%= element.telepon %> 
                     </div>
 
                     <div class="col-lg-3">
-                        <small class="text-succes">
+                        <small class="text-warning">
                             Opsi
                         </small> <br>
 
                         <a href="/member/edit/<%= element.id %> ">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-sm" style="background-color: #BABD42">
                                 Edit
                             </button>
                         </a>
@@ -54,7 +54,7 @@
 <!-- button nambah data-->
 <!-- button add new data -->
 <a href="/member/add">
-    <button class="btn btn-md btn-success">
+    <button class="btn btn-md text-light" style="background-color: #82954B;">
         Tambah Data
     </button>
 </a>

@@ -11,25 +11,25 @@ const telurController = require(`../controllers/telur.controller`)
 app.use(express.urlencoded({ extended: true }))
 
 // /** load authorization from middleware */
-// const authorization = require(`../middleware/authorization`)
+const authorization = require(`../middleware/authorization`)
 
 /** create route for access telur's data */
-app.get("/", telurController.showDataTelur)
+app.get("/", authorization.cekUser, telurController.showDataTelur)
 
 /** create route for show add telur view */
-app.get("/add", telurController.showAddPage)
+app.get("/add", authorization.cekUser, telurController.showAddPage)
 
 /** create route for process of add new telur */
-app.post("/add", telurController.processInsert)
+app.post("/add", authorization.cekUser, telurController.processInsert)
 
 /** create route for show edit telur view */
-app.get("/edit/:id", telurController.showEditPage)
+app.get("/edit/:id", authorization.cekUser, telurController.showEditPage)
 
 /** create route for process update telur */
-app.post("/edit/:id", telurController.processUpdate)
+app.post("/edit/:id", authorization.cekUser, telurController.processUpdate)
 
 /** create route for process delete telur */
-app.get("/delete/:id", telurController.processDelete)
+app.get("/delete/:id", authorization.cekUser, telurController.processDelete)
 
 /** export object "app" to another file */
 module.exports = app

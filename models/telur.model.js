@@ -14,7 +14,7 @@
  exports.findAll = () => {
     return new Promise((resolve, rejected) => {
         /** define query to get all data */
-        let query = `select * from ${tableName}`
+        let query = `select * from ${tableName} order by jenis_telur`
 
         /** show query as log in console */
         console.log(`Run: ${query}`)

@@ -15,7 +15,8 @@
     return new Promise((resolve, rejected) => {
         /** define query to get all data */
         let query = `select * from ${tableName} 
-        join telur on telur.id = detail_transaksi.id_telur`
+        join telur on telur.id = detail_transaksi.id_telur
+        join pack on pack.id = detail_transaksi.id_pack`
 
         /** show query as log in console */
         console.log(`Run: ${query}`)
@@ -64,7 +65,8 @@
 
         /** define query to get all data */
         let query = `select * from ${tableName} 
-        join telur on telur.id = detail_transaksi.id_telur where ${params}`
+        join telur on telur.id = detail_transaksi.id_telur 
+        join pack on pack.id = detail_transaksi.id_pack where ${params}`
 
 
         /** show query as log in console */
@@ -136,3 +138,51 @@
         })
     })
 }
+
+/** ----------------------------------------------------------------------- 
+  * create and export 
+  * function to delete data of table */
+ exports.delete = (parameter) => {
+    return new Promise((resolve, rejected) => {
+        /** -----------------------------------------
+         * parameter contain data like this:
+         * parameter = {
+         *      id: '1'
+         * }
+         * 
+         * to create Query for update data, we have to
+         * arrange every key and its value of parameter
+         * to be string
+         * ----------------------------------------------
+         */
+
+        /** ----------------------------------------------
+         * arrange list of parameter's keys and its value as string */
+        let params = Object
+            .keys(parameter)
+            .map(key => `${key}="${parameter[key]}"`)
+            .join(" and ")
+        /** result:
+         * params = ' id="1" '
+         * ------------------------------------------------
+         */
+
+        /** create query for delete */
+        let query = `delete from ${tableName} where ${params}`
+
+        /** show query as log in console */
+        console.log(`Run: ${query}`)
+
+        /** run query */
+        connection.query(query, (error, result) => {
+            if (error) {
+                /** reject with error message */
+                rejected(error.message)
+            }
+
+            /** return resolve with data */
+            resolve(result)
+        })
+    })
+}
+

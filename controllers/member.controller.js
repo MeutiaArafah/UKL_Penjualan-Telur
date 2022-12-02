@@ -13,7 +13,7 @@ exports.showDataMember = async (request, response) => {
         let sendData = {
             page: `member`,
             data: dataMember,
-            // dataUser: request.session.dataUser
+            dataUser: request.session.dataUser
         }
         return response.render(`../views/index`, sendData)
 
@@ -37,7 +37,7 @@ exports.showTambahMember = async (request, response) => {
             telepon: ``,
             page: `form-member`,
             targetRoute: `/member/add`,
-            // dataUser: response.session.dataUser
+            dataUser: request.session.dataUser
         }
         return response.render(`../views/index`, sendData)
 
@@ -93,7 +93,7 @@ exports.showEditMember = async (request, response) => {
             telepon: member[0].telepon,
             page: `form-member`,
             targetRoute: `/member/edit/${id}`,
-            // dataUser: request.session.dataUser
+            dataUser: request.session.dataUser
         }
 
         return response.render(`../views/index`, sendData)

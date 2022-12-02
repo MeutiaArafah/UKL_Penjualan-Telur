@@ -11,7 +11,7 @@ const username = `root`
 const password = ``
 
 /** set selected database name */ 
-const dbName = `db_telur`
+const dbName = `db_penjualantelur`
 
 /** create object 'connection' * to create connection for mysql */ 
 const connection = mysql.createConnection({ 

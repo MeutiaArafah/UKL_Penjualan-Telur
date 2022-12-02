@@ -2,8 +2,8 @@
 const {request, response}  = require("express")
 const adminModel = require(`../models/admin.model`)
 
-// /** memanggil file crypt.js */
-// const crypt = require(`../crypt`)
+ /** memanggil file crypt.js */
+const crypt = require(`../crypt`)
 
 exports.showDataAdmin = async (request, response) => {
     try {
@@ -38,8 +38,8 @@ exports.showTambahAdmin = async (request, response) => {
             password: ``,
             page: `form-admin`,
             targetRoute: `/admin/add`,
-            // deskripsi: crypt.deskripsi, // kuning = function
-            // dataUser: request.session.dataUser
+            deskripsi: crypt.deskripsi, // kuning = function
+            dataUser: request.session.dataUser// menyimpan data user - login
         }
         return response.render(`../views/index`, sendData)
 
@@ -95,8 +95,8 @@ exports.showEditAdmin = async (request, response) => {
             password: admin[0].password,
             page: `form-admin`,
             targetRoute: `/admin/edit/${id}`, 
-            // deskripsi: crypt.deskripsi, // kuning = function
-            // dataUser: request.session.dataUser
+            deskripsi: crypt.deskripsi, // kuning = function
+            dataUser: request.session.dataUser
         }
 
         return response.render(`../views/index`, sendData)
